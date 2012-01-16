@@ -2,7 +2,7 @@ scribe_logger
 =============
 
 This package contains a low level interface for writing to Scribe,
-as well as a higher level log handler with plays nicely with Python's
+as well as a higher level log handler which plays nicely with Python's
 logging facilities.
 
 
