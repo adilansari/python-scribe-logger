@@ -7,8 +7,7 @@ data in your own format.
 *Usage*
 >>> from scribe_logger.writer import ScribeWriter
 >>> writer = ScribeWriter('localhost', 1463, "category")
->>> writer.write("my message")
->>> writer.write("my message", 'another_category')
+>>> writer.write("another_category", "my message")
 
 """
 from scribe import scribe
