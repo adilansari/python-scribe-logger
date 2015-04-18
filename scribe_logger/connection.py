@@ -2,12 +2,14 @@ from scribe import scribe
 from thrift.transport import TTransport, TSocket
 from thrift.protocol import TBinaryProtocol
 from thrift import Thrift
+import threading
 
 
 class Connection(object):
 
     def __init__(self, host, port):
         self._configure_scribe(host, port)
+        self.lock = threading.RLock()
 
     def _configure_scribe(self, host, port):
         self.socket = TSocket.TSocket(host=host, port=port)
@@ -19,6 +21,7 @@ class Connection(object):
             strictWrite=False)
         self.client = scribe.Client(iprot=self.protocol, oprot=self.protocol)
 
+    @property
     def is_ready(self):
         return self._is_scribe_ready()
 

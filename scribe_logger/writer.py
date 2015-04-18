@@ -11,32 +11,30 @@ data in your own format.
 
 """
 from scribe import scribe
-from thrift import Thrift
-import threading
 from scribe_logger import connection
 
 
 class ScribeWriter(object):
 
     #: Default category to write to
-    default_category = 'default'
+    DEFAULT_CATEGORY = 'default'
 
-    def __init__(self, host, port, category=default_category):
+    def __init__(self, host, port, category=DEFAULT_CATEGORY):
         self.category = category
         self.client = connection(host, port)
-        self.lock = threading.RLock()
 
     def write(self, data):
-        """Write data to scribe instance"""
-        # data can be just a message or a list of messages
+        """Write data to scribe instance
 
-        if not self.client.is_ready():
-            # raise ScribeNotReady
-            return
+        arguments:
+        data -- String or list of Strings to be written to Scribe
+        """
 
-        # this can be removed
-        if not isinstance(data, list):
-            data = [data]
+        # make these both exceptions
+        def _raise(e):
+            raise e
+        assert data, 'data cannot be empty'
+        assert self.client.is_ready, 'client is not ready'
 
         # find a better way to do this
         messages = self._generate_log_entries(data)
@@ -45,6 +43,10 @@ class ScribeWriter(object):
 
     def _generate_log_entries(self, data):
         messages = []
+
+        # this can be removed
+        if not isinstance(data, list):
+            data = [data]
 
         # this generate_log_entries()
         for msg in data:
