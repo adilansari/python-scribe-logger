@@ -11,71 +11,49 @@ data in your own format.
 
 """
 from scribe import scribe
-from thrift.transport import TTransport, TSocket
-from thrift.protocol import TBinaryProtocol
 from thrift import Thrift
-import time
 import threading
+from scribe_logger import connection
 
 
 class ScribeWriter(object):
 
-    def __init__(self, host, port, default_category='default'):
-        self.default_category = default_category
-        self._configure_scribe(host, port)
+    #: Default category to write to
+    default_category = 'default'
+
+    def __init__(self, host, port, category=default_category):
+        self.category = category
+        self.client = connection(host, port)
         self.lock = threading.RLock()
 
-    def write(self, category, data):
+    def write(self, data):
         """Write data to scribe instance"""
+        # data can be just a message or a list of messages
 
-        if not self._is_scribe_ready():
+        if not self.client.is_ready():
+            # raise ScribeNotReady
             return
 
+        # this can be removed
         if not isinstance(data, list):
             data = [data]
 
-        category = category or self.default_category
+        # find a better way to do this
+        messages = self._generate_log_entries(data)
+
+        self.client.send(messages)
+
+    def _generate_log_entries(self, data):
         messages = []
-        
+
+        # this generate_log_entries()
         for msg in data:
             try:
-                entry = scribe.LogEntry(category=category, message=msg)
+                # this doesn't have to be a dict of course, find something better
+                entry = scribe.LogEntry(category=self.category, message=msg)
             except Exception, e:
-                entry = scribe.LogEntry(dict(category=category, message=msg))
-                
+                entry = scribe.LogEntry(dict(category=self.category, message=msg))
+
             messages.append(entry)
 
-        self.lock.acquire()
-        try:
-            self.client.Log(messages=messages)
-        except Thrift.TException, tx:
-            self.transport.close()
-        except Exception, e:
-            self.transport.close()
-        finally:
-            self.lock.release()
-
-    def _configure_scribe(self, host, port):
-        self.socket = TSocket.TSocket(host=host, port=port)
-        self.socket.setTimeout(1000)
-        self.transport = TTransport.TFramedTransport(self.socket)
-        self.protocol = TBinaryProtocol.TBinaryProtocolAccelerated(
-            trans=self.transport, strictRead=False, strictWrite=False)
-        self.client = scribe.Client(iprot=self.protocol, oprot=self.protocol)
-
-    def _is_scribe_ready(self):
-        """Check to see if scribe is ready to be written to"""
-        if self.transport.isOpen():
-            return True
-
-        self.lock.acquire()
-        try:
-            self.transport.open()
-            return True
-        except Thrift.TException, tx:
-            self.transport.close()
-        except Exception, e:
-            self.transport.close()
-        finally:
-            self.lock.release()
-        return False
+            return messages
