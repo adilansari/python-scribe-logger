@@ -13,7 +13,7 @@ Logger Usage
 from scribe_logger.logger import ScribeLogHandler
 import logging
 
-my_logger = logging.getLogger('MyLogger')
+my_logger = logging.getLogger("MyLogger")
 my_logger.setLevel(logging.DEBUG)
 
 scribe = ScribeLogHandler(category="test_category")
@@ -29,6 +29,5 @@ Writer Usage
 ```python
 from scribe_logger.writer import ScribeWriter
 writer = ScribeWriter('localhost', 1463, "category")
-writer.write("my message")
-writer.write("my message", 'another_category')
+writer.write("another_category", "my message")
 ```
