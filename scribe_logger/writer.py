@@ -7,21 +7,21 @@ data in your own format.
 *Usage*
 >>> from scribe_logger.writer import ScribeWriter
 >>> writer = ScribeWriter('localhost', 1463, "category")
->>> writer.write("another_category", "my message")
-
+>>> writer.write("my message")
 """
+
 from scribe import scribe
-from scribe_logger import connection
+from connection import Connection
 
 
 class ScribeWriter(object):
 
-    #: Default category to write to
+    """Default category to write to"""
     DEFAULT_CATEGORY = 'default'
 
     def __init__(self, host, port, category=DEFAULT_CATEGORY):
         self.category = category
-        self.client = connection(host, port)
+        self.client = Connection(host, port)
 
     def write(self, data):
         """Write data to scribe instance
@@ -30,32 +30,22 @@ class ScribeWriter(object):
         data -- String or list of Strings to be written to Scribe
         """
 
-        # make these both exceptions
-        def _raise(e):
-            raise e
-        assert data, 'data cannot be empty'
-        assert self.client.is_ready, 'client is not ready'
+        if not self.client.is_ready:
+            raise Exception('client not ready')
 
-        # find a better way to do this
         messages = self._generate_log_entries(data)
-
         self.client.send(messages)
 
     def _generate_log_entries(self, data):
-        messages = []
-
-        # this can be removed
-        if not isinstance(data, list):
-            data = [data]
-
-        # this generate_log_entries()
-        for msg in data:
-            try:
-                # this doesn't have to be a dict of course, find something better
-                entry = scribe.LogEntry(category=self.category, message=msg)
-            except Exception, e:
-                entry = scribe.LogEntry(dict(category=self.category, message=msg))
-
-            messages.append(entry)
+        def __generate_log_entries(data):
+            data = data if isinstance(data, list) else [data]
+            messages = []
+            for msg in data:
+                if isinstance(msg, basestring):
+                    messages.append(scribe.LogEntry(category=self.category, message=msg))
+                else:
+                    raise Exception('string or list of strings')
 
             return messages
+
+        return __generate_log_entries(data)
