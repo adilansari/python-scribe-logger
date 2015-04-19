@@ -2,6 +2,7 @@ from thrift.transport import TTransport, TSocket
 from thrift.protocol import TBinaryProtocol
 import threading
 from scribe import scribe
+from thrift.Thrift import TException
 
 
 class Connection(object):
@@ -45,8 +46,10 @@ class Connection(object):
         self.lock.acquire()
         try:
             self.client.Log(messages=messages)
-        except Exception:
+        except TException:
             self.transport.close()
             raise
         finally:
             self.lock.release()
+
+        return True

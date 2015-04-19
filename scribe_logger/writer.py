@@ -31,7 +31,7 @@ class ScribeWriter(object):
         """
 
         messages = self._generate_log_entries(data)
-        self.client.send(messages)
+        return self.client.send(messages)
 
     def _generate_log_entries(self, data):
         def __generate_log_entries(data):
