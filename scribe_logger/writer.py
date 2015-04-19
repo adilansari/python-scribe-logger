@@ -24,14 +24,11 @@ class ScribeWriter(object):
         self.client = Connection(host, port)
 
     def write(self, data):
-        """Write data to scribe instance
-
+        """
+        Write data to scribe instance.
         arguments:
         data -- String or list of Strings to be written to Scribe
         """
-
-        if not self.client.is_ready:
-            raise Exception('client not ready')
 
         messages = self._generate_log_entries(data)
         self.client.send(messages)
@@ -44,7 +41,7 @@ class ScribeWriter(object):
                 if isinstance(msg, basestring):
                     messages.append(scribe.LogEntry(category=self.category, message=msg))
                 else:
-                    raise Exception('string or list of strings')
+                    raise ValueError("Illegal argument to 'write'. Expected a string or list of strings")
 
             return messages
 

@@ -3,6 +3,7 @@ from thrift.transport import TTransport, TSocket
 from thrift.protocol import TBinaryProtocol
 from thrift import Thrift
 import threading
+import sys
 
 
 class Connection(object):
@@ -21,10 +22,6 @@ class Connection(object):
             strictWrite=False)
         self.client = scribe.Client(iprot=self.protocol, oprot=self.protocol)
 
-    @property
-    def is_ready(self):
-        return self._is_scribe_ready()
-
     def _is_scribe_ready(self):
         """Check to see if scribe is ready to be written to"""
         if self.transport.isOpen():
@@ -33,24 +30,25 @@ class Connection(object):
         self.lock.acquire()
         try:
             self.transport.open()
-            return True
-        except Thrift.TException, tx:
+        except Exception:
             self.transport.close()
-        except Exception, e:
-            #raise ConnecionError
-            self.transport.close()
+            raise
         finally:
             self.lock.release()
-        return False
 
     def send(self, messages):
-        # find individual exceptions
+        """
+        Sends the log stream to scribe
+        arguments:
+        messages -- list of LogEntry() objects
+        """
+
+        self._is_scribe_ready()
         self.lock.acquire()
         try:
             self.client.Log(messages=messages)
-        except Thrift.TException, tx:
+        except Exception:
             self.transport.close()
-        except Exception, e:
-            self.transport.close()
+            raise
         finally:
             self.lock.release()
