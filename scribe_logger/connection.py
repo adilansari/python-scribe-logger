@@ -45,11 +45,9 @@ class Connection(object):
         self._is_scribe_ready()
         self.lock.acquire()
         try:
-            self.client.Log(messages=messages)
+            return (self.client.Log(messages=messages) == 0)
         except TException:
             self.transport.close()
             raise
         finally:
             self.lock.release()
-
-        return True

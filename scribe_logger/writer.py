@@ -31,7 +31,8 @@ class ScribeWriter(object):
         """
 
         messages = self._generate_log_entries(data)
-        return self.client.send(messages)
+        if not self.client.send(messages):
+            raise ScribeLoggerError('Write failed!')
 
     def _generate_log_entries(self, data):
         def __generate_log_entries(data):
@@ -46,3 +47,7 @@ class ScribeWriter(object):
             return messages
 
         return __generate_log_entries(data)
+
+
+class ScribeLoggerError(Exception):
+    pass

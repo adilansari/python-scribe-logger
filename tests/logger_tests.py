@@ -12,7 +12,7 @@ class LoggerTestCase(TestCase):
 
     def setUp(self):
         self.mock_connection = Mock(spec=Connection)
-        self.mock_connection.send = lambda self: True
+        self.mock_connection.send.return_value = True
 
     def test_valid_logging(self):
         test_logger = logging.getLogger('test_valid_logging')
