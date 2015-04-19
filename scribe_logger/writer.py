@@ -10,8 +10,8 @@ data in your own format.
 >>> writer.write("my message")
 """
 
-from scribe import scribe
 from connection import Connection
+from scribe import scribe
 
 
 class ScribeWriter(object):
