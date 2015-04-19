@@ -26,11 +26,11 @@ class WriterTestCase(TestCase):
         self.assertRaises(ValueError, self.writer.write, 12345)
 
     def test_valid_writes(self):
-        self.assertTrue(self.writer.write('message'))
-        self.assertTrue(self.writer.write(['m1', 'm2']))
-        self.assertTrue(self.writer.write([]))
-        self.assertTrue(self.writer.write([dumps(defaultdict()), 'message']))
-        self.assertTrue(self.writer.write(dumps(defaultdict())))
+        self.assertIsNone(self.writer.write('message'))
+        self.assertIsNone(self.writer.write(['m1', 'm2']))
+        self.assertIsNone(self.writer.write([]))
+        self.assertIsNone(self.writer.write([dumps(defaultdict()), 'message']))
+        self.assertIsNone(self.writer.write(dumps(defaultdict())))
 
     def test_connection_error(self):
         self.writer = ScribeWriter(self.HOST, self.PORT)
