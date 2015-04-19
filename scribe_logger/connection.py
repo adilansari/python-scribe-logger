@@ -44,7 +44,6 @@ class Connection(object):
         return False
 
     def send(self, messages):
-        # move it to connection - send(messages)
         # find individual exceptions
         self.lock.acquire()
         try:
