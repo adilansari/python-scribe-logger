@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.org/adilansari/python-scribe-logger.svg?branch=master)](https://travis-ci.org/adilansari/python-scribe-logger)
 [![Coverage Status](https://coveralls.io/repos/adilansari/python-scribe-logger/badge.svg?branch=master)](https://coveralls.io/r/adilansari/python-scribe-logger?branch=master)
+[![Supported Python versions](https://pypip.in/py_versions/scribe_logger/badge.svg)](https://pypi.python.org/pypi/scribe_logger/)
+[![License](https://pypip.in/license/scribe_logger/badge.svg)](https://pypi.python.org/pypi/scribe_logger/)
 
 ## Scribe logger
 =============
@@ -8,7 +10,9 @@ This package contains a low level interface for writing to Scribe,
 as well as a higher level log handler which plays nicely with Python's
 logging facilities.
 
-> Requires Python 2.7 or higher
+
+> Supports Python 2.7
+
 
 #### Installation
 -----------
