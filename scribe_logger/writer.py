@@ -10,7 +10,7 @@ data in your own format.
 >>> writer.write("my message")
 """
 
-from connection import Connection
+from scribe_logger.connection import Connection
 from scribe import scribe
 from exceptions import ScribeLoggerError
 
