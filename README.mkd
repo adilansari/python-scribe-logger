@@ -5,7 +5,7 @@ This package contains a low level interface for writing to Scribe,
 as well as a higher level log handler which plays nicely with Python's
 logging facilities.
 
-
+> Requires Python 2.7 or higher
 
 #### Installation
 -----------
