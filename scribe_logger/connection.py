@@ -49,7 +49,6 @@ class Connection(object):
         finally:
             self.lock.release()
 
-
     def send(self, messages):
         """
         Sends the log stream to scribe
