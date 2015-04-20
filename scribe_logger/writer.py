@@ -12,7 +12,7 @@ data in your own format.
 
 from scribe_logger.connection import Connection
 from scribe import scribe
-from exceptions import ScribeLoggerError
+from scribe_logger.exceptions import ScribeLoggerError
 
 
 class ScribeWriter(object):
