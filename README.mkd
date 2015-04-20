@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/adilansari/python-scribe-logger.svg?branch=master)](https://travis-ci.org/adilansari/python-scribe-logger)
-
+[![Coverage Status](https://coveralls.io/repos/adilansari/python-scribe-logger/badge.svg)](https://coveralls.io/r/adilansari/python-scribe-logger)
 
 ## Scribe logger
 =============
