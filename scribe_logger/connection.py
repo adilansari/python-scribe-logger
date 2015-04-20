@@ -24,12 +24,16 @@ class Connection(object):
     @property
     def is_ready(self):
         """
-        Wrapper around _is_scribe_ready() bypassing exception
+        Wrapper around _init_connection() bypassing Exception
         """
-        try:
-            return self.transport.isOpen()
-        except:
-            return False
+        return self.transport.isOpen()
+
+    def close(self):
+        """
+        Close connection
+        """
+        if self.is_ready:
+            self.transport.close()
 
     def _init_connection(self):
         """Check to see if scribe is ready to be written to"""
@@ -40,10 +44,11 @@ class Connection(object):
         try:
             self.transport.open()
         except Exception:
-            self.transport.close()
+            self.close()
             raise
         finally:
             self.lock.release()
+
 
     def send(self, messages):
         """

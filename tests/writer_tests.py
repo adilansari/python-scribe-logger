@@ -10,8 +10,8 @@ from scribe_logger.exceptions import ScribeLoggerError
 
 class WriterTestCase(TestCase):
 
-    HOST = 'test_host'
-    PORT = 91464
+    HOST = 'localhost'
+    PORT = 1464
 
     def setUp(self):
         self.mock_connection = Mock(spec=Connection)
@@ -41,5 +41,11 @@ class WriterTestCase(TestCase):
 
     def test_connection_error(self):
         self.writer = ScribeWriter(self.HOST, self.PORT)
-        with self.assertRaises(TException):
+        try:
             self.writer.write('message')
+        except TException:
+            self.assertFalse(self.writer.client.is_ready)
+        else:
+            self.assertTrue(self.writer.client.is_ready)
+        finally:
+            self.writer.client.close()
