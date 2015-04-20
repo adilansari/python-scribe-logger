@@ -1,33 +1,56 @@
-scribe_logger
+[![Build Status](https://travis-ci.org/adilansari/python-scribe-logger.svg?branch=master)](https://travis-ci.org/adilansari/python-scribe-logger)
+[![Coverage Status](https://coveralls.io/repos/adilansari/python-scribe-logger/badge.svg)](https://coveralls.io/r/adilansari/python-scribe-logger)
+
+## Scribe logger
 =============
 
 This package contains a low level interface for writing to Scribe,
 as well as a higher level log handler which plays nicely with Python's
 logging facilities.
 
+> Requires Python 2.7 or higher
 
-Logger Usage
+#### Installation
+-----------
+`pip install scribe-logger`
+
+
+
+#### Testing locally
+-----------
+````
+git clone https://github.com/adilansari/python-scribe-logger.git
+cd python-scribe-logger
+pip install -U -r requirements.txt
+python runtests.py
+````
+
+
+
+#### Logger usage
 ------------
 
-```python
+````python
 from scribe_logger.logger import ScribeLogHandler
 import logging
 
-my_logger = logging.getLogger("MyLogger")
+my_logger = logging.getLogger('MyLogger')
 my_logger.setLevel(logging.DEBUG)
 
-scribe = ScribeLogHandler(category="test_category")
+scribe = ScribeLogHandler('localhost', 1464, category='test_category')
 scribe.setLevel(logging.DEBUG)
 my_logger.addHandler(scribe)
 
-my_logger.info("This is a test message")
-```
+my_logger.info('This is a test message')
+````
 
-Writer Usage
+
+
+#### Writer usage
 ------------
 
-```python
+````python
 from scribe_logger.writer import ScribeWriter
-writer = ScribeWriter('localhost', 1463, "category")
-writer.write("another_category", "my message")
-```
+writer = ScribeWriter('localhost', 1464, 'category')
+writer.write('my message')
+````
