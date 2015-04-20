@@ -21,10 +21,20 @@ class Connection(object):
             strictWrite=False)
         self.client = scribe.Client(iprot=self.protocol, oprot=self.protocol)
 
-    def _is_scribe_ready(self):
+    @property
+    def is_ready(self):
+        """
+        Wrapper around _is_scribe_ready() bypassing exception
+        """
+        try:
+            return self.transport.isOpen()
+        except:
+            return False
+
+    def _init_connection(self):
         """Check to see if scribe is ready to be written to"""
-        if self.transport.isOpen():
-            return True
+        if self.is_ready:
+            return
 
         self.lock.acquire()
         try:
@@ -42,7 +52,7 @@ class Connection(object):
         messages -- list of LogEntry() objects
         """
 
-        self._is_scribe_ready()
+        self._init_connection()
         self.lock.acquire()
         try:
             return (self.client.Log(messages=messages) == 0)
