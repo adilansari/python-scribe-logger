@@ -7,8 +7,8 @@ import logging
 
 class LoggerTestCase(TestCase):
 
-    HOST = 'test_host'
-    PORT = 91464
+    HOST = 'localhost'
+    PORT = 1464
 
     def setUp(self):
         self.mock_connection = Mock(spec=Connection)
