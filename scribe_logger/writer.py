@@ -12,6 +12,7 @@ data in your own format.
 
 from connection import Connection
 from scribe import scribe
+from exceptions import ScribeLoggerError
 
 
 class ScribeWriter(object):
@@ -47,7 +48,3 @@ class ScribeWriter(object):
             return messages
 
         return __generate_log_entries(data)
-
-
-class ScribeLoggerError(Exception):
-    pass
