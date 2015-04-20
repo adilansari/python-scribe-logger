@@ -1,0 +1,2 @@
+class ScribeLoggerError(Exception):
+        pass
