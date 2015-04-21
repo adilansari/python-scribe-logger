@@ -59,3 +59,11 @@ from scribe_logger.writer import ScribeWriter
 writer = ScribeWriter('localhost', 1464, 'category')
 writer.write('my message')
 ````
+
+
+
+#### Contributors
+--------------
+@adilansari
+@mwhooker
+@lenn0x
