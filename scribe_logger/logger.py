@@ -18,11 +18,12 @@ class ScribeLogHandler(logging.Handler, ScribeWriter):
         record = self.format(record)
         try:
             self.write(record)
-            self.flush()
         except (KeyboardInterrupt, SystemExit):
             raise
         except:
             self.handleError(record)
+        finally:
+            self.flush()
 
     def flush(self):
         pass
