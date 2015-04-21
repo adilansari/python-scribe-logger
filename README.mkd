@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/adilansari/python-scribe-logger.svg?branch=master)](https://travis-ci.org/adilansari/python-scribe-logger)
+[![Code Climate](https://codeclimate.com/github/adilansari/python-scribe-logger/badges/gpa.svg)](https://codeclimate.com/github/adilansari/python-scribe-logger)
 [![Coverage Status](https://coveralls.io/repos/adilansari/python-scribe-logger/badge.svg?branch=master)](https://coveralls.io/r/adilansari/python-scribe-logger?branch=master)
 [![Supported Python versions](https://pypip.in/py_versions/scribe_logger/badge.svg)](https://pypi.python.org/pypi/scribe_logger/)
 [![License](https://pypip.in/license/scribe_logger/badge.svg)](https://pypi.python.org/pypi/scribe_logger/)
