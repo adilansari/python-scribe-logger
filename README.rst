@@ -47,8 +47,10 @@ Writer usage
 .. code:: python
 
     from scribe_logger.writer import ScribeWriter
-    writer = ScribeWriter('localhost', 1464, 'category')
-    writer.write('my message')
+
+    writer = ScribeWriter('localhost', 1464, 'test_category')
+    writer.write('test_message_1')
+    writer.write(['test_message_1', 'test_message_2', 'test_message_3'])
 
 Contributors
 -----------------
