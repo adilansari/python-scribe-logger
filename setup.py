@@ -26,7 +26,7 @@ setup(
         'Natural Language :: English',
         'Programming Language :: Python :: 2.7',
         'Topic :: Software Development :: Libraries',
-        'Topic :: Software Development :: Logging',
+        'Topic :: System :: Logging',
         'License :: OSI Approved :: MIT License',
     ],
     keywords='scribe logging',
