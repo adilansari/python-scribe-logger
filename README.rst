@@ -1,5 +1,4 @@
-|Build Status| |Code Climate| |Coverage Status| |Supported Python
-versions| |License| |Downloads|
+|Build Status| |Code Climate| |Coverage Status| |License| |Downloads|
 
 Scribe logger
 ================
