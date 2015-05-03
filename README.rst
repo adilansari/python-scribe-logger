@@ -1,5 +1,5 @@
 |Build Status| |Code Climate| |Coverage Status| |Supported Python
-versions| |License|
+versions| |License| |Downloads|
 
 Scribe logger
 ================
@@ -64,5 +64,7 @@ Contributors
    :target: https://coveralls.io/r/adilansari/python-scribe-logger?branch=master
 .. |Supported Python versions| image:: https://pypip.in/py_versions/scribe_logger/badge.svg
    :target: https://pypi.python.org/pypi/scribe_logger/
-.. |License| image:: https://pypip.in/license/scribe_logger/badge.svg
+.. |License| image:: https://img.shields.io/github/license/adilansari/python-scribe-logger.svg
+   :target: https://github.com/adilansari/python-scribe-logger/blob/master/LICENSE.mkd
+.. |Downloads| image:: https://img.shields.io/pypi/dm/scribe_logger.svg
    :target: https://pypi.python.org/pypi/scribe_logger/
