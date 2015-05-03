@@ -1,7 +1,7 @@
 |Build Status| |Code Climate| |Coverage Status| |Supported Python
 versions| |License|
 
-## Scribe logger
+Scribe logger
 ================
 
 This package contains a low level interface for writing to Scribe, as
@@ -10,12 +10,12 @@ logging facilities.
 
     Supports Python 2.7
 
-#### Installation
+Installation
 -----------------
 
 ``pip install scribe-logger``
 
-#### Testing locally
+Testing locally
 --------------------
 
 ::
@@ -25,7 +25,7 @@ logging facilities.
     pip install -U -r requirements.txt
     python runtests.py
 
-#### Logger usage
+Logger usage
 -----------------
 
 .. code:: python
@@ -42,7 +42,7 @@ logging facilities.
 
     my_logger.info('This is a test message')
 
-#### Writer usage
+Writer usage
 -----------------
 
 .. code:: python
@@ -51,7 +51,7 @@ logging facilities.
     writer = ScribeWriter('localhost', 1464, 'category')
     writer.write('my message')
 
-#### Contributors
+Contributors
 -----------------
 
 @adilansari @mwhooker @lenn0x
