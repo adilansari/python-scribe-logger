@@ -41,7 +41,12 @@ Logger usage
 
     my_logger.info('This is a test message')
 
-``Logger raises exceptions``
+``Exceptions are suppressed by default.``
+Use **silent=False** to raise them:
+
+.. code:: python
+
+    scribe = ScribeLogHandler('localhost', 1464, category='test_category', silent=False)
 
 Writer usage
 -----------------
@@ -57,7 +62,8 @@ Writer usage
     except ScribeLoggerError:
         raise
 
-Use **silent=True** To suppress exceptions:
+``Exceptions are raised by default.``
+Use **silent=True** to suppress them:
 
 .. code:: python
 

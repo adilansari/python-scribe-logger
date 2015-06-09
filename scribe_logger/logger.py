@@ -10,9 +10,9 @@ import logging.handlers
 
 class ScribeLogHandler(logging.Handler, ScribeWriter):
 
-    def __init__(self, host, port, category='default'):
+    def __init__(self, host, port, category='default', silent=True):
         logging.Handler.__init__(self)
-        ScribeWriter.__init__(self, host, port, category)
+        ScribeWriter.__init__(self, host, port, category, silent)
 
     def emit(self, record):
         record = self.format(record)
