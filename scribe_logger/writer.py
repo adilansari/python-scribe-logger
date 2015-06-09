@@ -19,10 +19,12 @@ class ScribeWriter(object):
 
     """Default category to write to"""
     DEFAULT_CATEGORY = 'default'
+    SILENT=False
 
-    def __init__(self, host, port, category=DEFAULT_CATEGORY):
+    def __init__(self, host, port, category=DEFAULT_CATEGORY, silent=SILENT):
         self.category = category
         self.client = Connection(host, port)
+        ScribeWriter.SILENT = silent
 
     def write(self, data):
         """
@@ -30,10 +32,21 @@ class ScribeWriter(object):
         arguments:
         data -- String or list of Strings to be written to Scribe
         """
-
         messages = self._generate_log_entries(data)
+
+        try:
+            self.client.init_connection()
+        except Exception as e:
+            self._raise(e.message)
+
         if not self.client.send(messages):
-            raise ScribeLoggerError('Write failed!')
+            self._raise('Write failed!')
+
+    def _raise(self, message):
+        if ScribeWriter.SILENT:
+            return
+        else:
+            raise ScribeLoggerError(message)
 
     def _generate_log_entries(self, data):
         def __generate_log_entries(data):

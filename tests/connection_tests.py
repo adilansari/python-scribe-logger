@@ -18,7 +18,7 @@ class ConnectionTestCase(TestCase):
         connection = Connection(self.HOST, self.PORT)
 
         try:
-            connection._init_connection()
+            connection.init_connection()
         except TException:
             self.assertFalse(connection.is_ready)
         else:
