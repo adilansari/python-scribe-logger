@@ -35,19 +35,23 @@ class Connection(object):
         if self.is_ready:
             self.transport.close()
 
-    def _init_connection(self):
+    def init_connection(self):
         """Check to see if scribe is ready to be written to"""
         if self.is_ready:
             return
 
-        self.lock.acquire()
-        try:
-            self.transport.open()
-        except Exception:
-            self.close()
-            raise
-        finally:
-            self.lock.release()
+        def _init_connection(self):
+
+            self.lock.acquire()
+            try:
+                self.transport.open()
+            except Exception:
+                self.close()
+                raise
+            finally:
+                self.lock.release()
+
+        _init_connection(self)
 
     def send(self, messages):
         """
@@ -56,12 +60,14 @@ class Connection(object):
         messages -- list of LogEntry() objects
         """
 
-        self._init_connection()
+        if not self.is_ready:
+            return False
+
         self.lock.acquire()
         try:
             return (self.client.Log(messages=messages) == 0)
-        except TException:
-            self.transport.close()
+        except Exception:
+            self.close()
             raise
         finally:
             self.lock.release()

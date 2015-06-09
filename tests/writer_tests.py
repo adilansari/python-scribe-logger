@@ -4,7 +4,6 @@ from collections import defaultdict
 from unittest import TestCase
 from mock import Mock
 from json import dumps
-from thrift.Thrift import TException
 from scribe_logger.exceptions import ScribeLoggerError
 
 
@@ -43,9 +42,12 @@ class WriterTestCase(TestCase):
         self.writer = ScribeWriter(self.HOST, self.PORT)
         try:
             self.writer.write('message')
-        except TException:
+        except ScribeLoggerError:
             self.assertFalse(self.writer.client.is_ready)
         else:
             self.assertTrue(self.writer.client.is_ready)
-        finally:
-            self.writer.client.close()
+
+    def test_no_errors(self):
+        self.writer = ScribeWriter(self.HOST, self.PORT, silent=True)
+        self.writer.write('message')
+

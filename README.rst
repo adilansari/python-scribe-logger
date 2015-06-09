@@ -41,6 +41,8 @@ Logger usage
 
     my_logger.info('This is a test message')
 
+``Logger raises exceptions``
+
 Writer usage
 -----------------
 
@@ -49,6 +51,17 @@ Writer usage
     from scribe_logger.writer import ScribeWriter
 
     writer = ScribeWriter('localhost', 1464, 'test_category')
+    try:
+        writer.write('test_message_1')
+        writer.write(['test_message_1', 'test_message_2', 'test_message_3'])
+    except ScribeLoggerError:
+        raise
+
+Use **silent=True** To suppress exceptions:
+
+.. code:: python
+
+    writer = ScribeWriter('localhost', 1464, 'test_category', silent=True)
     writer.write('test_message_1')
     writer.write(['test_message_1', 'test_message_2', 'test_message_3'])
 
