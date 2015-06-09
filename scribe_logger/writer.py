@@ -19,7 +19,7 @@ class ScribeWriter(object):
 
     """Default category to write to"""
     DEFAULT_CATEGORY = 'default'
-    SILENT=False
+    SILENT = False
 
     def __init__(self, host, port, category=DEFAULT_CATEGORY, silent=SILENT):
         self.category = category
