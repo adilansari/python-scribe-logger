@@ -10,7 +10,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 setup(
     name='scribe_logger',
-    version='1.1',
+    version='1.2',
     description='Scribe log writer and logging handler.',
     long_description=long_description,
     license='MIT',
