@@ -82,7 +82,7 @@ Contributors
    :target: https://codeclimate.com/github/adilansari/python-scribe-logger
 .. |Coverage Status| image:: https://coveralls.io/repos/adilansari/python-scribe-logger/badge.svg?branch=master
    :target: https://coveralls.io/r/adilansari/python-scribe-logger?branch=master
-.. |Supported Python versions| image:: https://pypip.in/py_versions/scribe_logger/badge.svg
+.. |Supported Python versions| image:: https://img.shields.io/pypi/pyversions/scribe_logger.svg
    :target: https://pypi.python.org/pypi/scribe_logger/
 .. |License| image:: https://img.shields.io/github/license/adilansari/python-scribe-logger.svg
    :target: https://github.com/adilansari/python-scribe-logger/blob/master/LICENSE.mkd
